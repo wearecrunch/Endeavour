@@ -17,7 +17,7 @@ class BlogItem extends ObjectModel {
             'color' => array('type' => self::TYPE_STRING, 'required' => TRUE),
             'title' => array('type' => self::TYPE_STRING, 'lang' => TRUE, 'required' => TRUE),
             'content' => array('type' => self::TYPE_HTML, 'lang' => TRUE, 'required' => TRUE),
-            'timestamp' => array('type' => self::TYPE_INT),
+            'timestamp' => array('type' => self::TYPE_DATE),
             'is_big' => array('type' => self::TYPE_BOOL),
         ),
     );
@@ -27,12 +27,13 @@ class BlogItem extends ObjectModel {
         parent::__construct($id, $lang, $shop);
 
         $this->id = $this->id_blogitem;
-        $this->timestamp = ($this->timestamp === NULL ? time() : $this->timestamp);
+        $this->timestamp = ($this->timestamp === NULL ? date('Y-m-d') : $this->timestamp);
     }
 
     public function getDate()
     {
-        return date('j F Y', $this->timestamp);
+        $date = DateTime::createFromFormat('Y-m-d', $this->timestamp);
+        echo htmlspecialchars($date->format('j F Y'), ENT_QUOTES, "UTF-8");
     }
 
     public function getPath()
