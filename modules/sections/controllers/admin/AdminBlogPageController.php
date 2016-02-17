@@ -64,6 +64,12 @@ class AdminBlogPageController extends AdminSectionsController {
                     'required' => TRUE,
                 ),
                 array(
+                    'type' => 'date',
+                    'label' => $this->l('Date'),
+                    'name' => 'timestamp',
+                    'required' => FALSE,
+                ),
+                array(
                     'type' => 'color',
                     'label' => $this->l('Color'),
                     'name' => 'color',
